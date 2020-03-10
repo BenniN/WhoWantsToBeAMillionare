@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
       button2.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              Toast.makeText(getBaseContext(),"Need to load last Game!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(),"Need to load last Game!",Toast.LENGTH_LONG).show();
           }
       });
 

@@ -28,38 +28,38 @@ public class WhoWantsToBeAMillionare extends Activity {
     ImageView graph;
 
     String correctanswer;
-    LinearLayout li;
+    //LinearLayout li;
     int j=0;
 
     Button b1,b2,b3,b4,b5,playnext;
     TextView resulttextview;
 
-    MediaPlayer mpaudio,mpaudio1,mpaudio2;
+    //MediaPlayer mpaudio,mpaudio1,mpaudio2;
 
     public void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_main);
 
-        mpaudio= MediaPlayer.create(this,R.drawable.kbc_tune);
-        mpaudio.start();
+        //mpaudio= MediaPlayer.create(this,R.drawable.);
+        //mpaudio.start();
 
-        mpaudio1= MediaPlayer.create(this,R.drawable.clock_tick);
+        //mpaudio1= MediaPlayer.create(this,R.drawable.clock_ti);
 
         populatelistview();
 
 
         graph=(ImageView)findViewById(R.id.graph);
-        time=(Button)findViewById(R.id.btictoc);
-        mpaudio.setOnCompletionListener(this);
+        time=(Button)findViewById(R.id.buttonClock);
+        //mpaudio.setOnCompletionListener((MediaPlayer.OnCompletionListener) this);
 
-        b1=(Button)findViewById(R.id.buttonOptions);
-        b2=(Button)findViewById(R.id.buttonA);
-        b3=(Button)findViewById(R.id.buttonB);
-        b4=(Button)findViewById(R.id.buttonC);
-        b5=(Button)findViewById(R.id.buttonD);
-        playnext=(Button)findViewById(R.id.nextplaybtn);
+        b1=(Button)findViewById(R.id.bquestion);
+        b2=(Button)findViewById(R.id.boptiona);
+        b3=(Button)findViewById(R.id.boptionb);
+        b4=(Button)findViewById(R.id.boptionc);
+        b5=(Button)findViewById(R.id.boptiond);
+        playnext=(Button)findViewById(R.id.buttonNext);
 
-        li=(LinearLayout)findViewById(R.id.interior4);
+        //li=(LinearLayout)findViewById(R.id.interior4);
         resulttextview=(TextView)findViewById(R.id.textresult);
         read();
     }
@@ -84,18 +84,18 @@ public class WhoWantsToBeAMillionare extends Activity {
 
             public void onFinish()
             {
-                mpaudio1.pause();
-                setContentView(R.layout.second);
-                Intent intent=new Intent(SecondActivity.this,MyActivity.class);
+                //mpaudio1.pause();
+                setContentView(R.layout.activity_main);
+                Intent intent=new Intent(WhoWantsToBeAMillionare.this,WhoWantsToBeAMillionare.class);
                 startActivity(intent);
-                SecondActivity.this.finish();
+                WhoWantsToBeAMillionare.this.finish();
             }
         };
     }
     public void clap()
     {
-        mpaudio2.pause();
-        mpaudio1.start();
+        //mpaudio2.pause();
+        //mpaudio1.start();
     }
 
     private void populatelistview()
@@ -106,14 +106,14 @@ public class WhoWantsToBeAMillionare extends Activity {
                 "4     £ 300","3     £ 200","2     £ 100","1     £ 50"};
         //  ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,myitems);
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,R.layout.list_view,myitems);
-        ListView list=(ListView)findViewById(R.id.listViewMain);
+        ListView list=(ListView)findViewById(R.id.ListViewMain);
 
         list.setAdapter(adapter);
 
     }
     public void onFiftyfifty(View view)
     {
-        Button b=(Button)findViewById(R.id.bfifty);
+        Button b=(Button)findViewById(R.id.buttonfiftyfifty);
         b.setBackgroundResource(R.drawable.custom_cancelfiftyfifty);
         b.setEnabled(true);
 
@@ -144,7 +144,7 @@ public class WhoWantsToBeAMillionare extends Activity {
     public void onPhoneAfriend(View view)
 
     {
-        Button b=(Button)findViewById(R.id.bphone);
+        Button b=(Button)findViewById(R.id.buttonPhone);
         b.setBackgroundResource(R.drawable.custom_cancelphoneafreind);
         b.setEnabled(true);
 
@@ -173,15 +173,12 @@ public class WhoWantsToBeAMillionare extends Activity {
 
     }
 
-    private void timeout()
-    {
+    private void timeout() {
 
-        cdt3 = new CountDownTimer(5000, 1000)
-        {
+        cdt3 = new CountDownTimer(5000, 1000) {
             // int s;
 
-            public void onTick(long millisUntilFinished)
-            {
+            public void onTick(long millisUntilFinished) {
                 // time.setText("" + millisUntilFinished / 1000);
                 // s=(int)millisUntilFinished/1000;
                 // System.out.println("This is the time"+s);
@@ -189,17 +186,16 @@ public class WhoWantsToBeAMillionare extends Activity {
 
             }
 
-            public void onFinish()
-            {
+            public void onFinish() {
                 playnext.setVisibility(View.GONE);
                 resulttextview.setVisibility(View.GONE);
                 cdt3.cancel();
             }
         };
-
+    }
         public void onAudiencepoll(View view)
         {
-            Button b=(Button)findViewById(R.id.baudiencepoll);
+            Button b=(Button)findViewById(R.id.buttonaudience);
             b.setBackgroundResource(R.drawable.custom_cancelaudiencepoll);
             b.setEnabled(true);
 
@@ -234,8 +230,6 @@ public class WhoWantsToBeAMillionare extends Activity {
             cdt2.start();
         }
 
-    }
-
     private void disapperaimage()
     {
         cdt2 = new CountDownTimer(5000, 1000)
@@ -264,22 +258,23 @@ public class WhoWantsToBeAMillionare extends Activity {
 
     public void onFlip(View view)
     {
-        Button b=(Button)findViewById(R.id.bflip);
+        Button b=(Button)findViewById(R.id.buttonflip);
         b.setBackgroundResource(R.drawable.custom_cancelflip);
         b.setEnabled(true);
 
         read();
     }
 
-    @Override
+
     public void onCompletion(MediaPlayer mediaPlayer)
     {
         //mpaudio2= MediaPlayer.create(this,R.drawable.);
-        mpaudio2.start();
+        //mpaudio2.start();
     }
 
     public void read()
     {
+
         setupCountDown();
         cdt.start();
 
@@ -297,7 +292,7 @@ public class WhoWantsToBeAMillionare extends Activity {
             Element rootNode = document.getRootElement();
             // List list = rootNode.getChildren("staff");
 
-            List list = rootNode.getChildren("Question");
+            List<Element> list = rootNode.getChildren("Question");
 
             // for (int i = 0; i < list.size(); i++) {
 
@@ -334,12 +329,14 @@ public class WhoWantsToBeAMillionare extends Activity {
         }
 
 
+
+
     }
 
     public void onOptionAClicked(View view)
     {
         cdt.cancel();
-        mpaudio2.pause();
+        //mpaudio2.pause();
         String value2=b2.getText().toString();
 
         if(value2.equalsIgnoreCase(correctanswer))
@@ -359,7 +356,7 @@ public class WhoWantsToBeAMillionare extends Activity {
     public void onOptionBClicked(View view)
     {
         cdt.cancel();
-        mpaudio2.pause();
+        //mpaudio2.pause();
         String value3=b3.getText().toString();
 
         if(value3.equalsIgnoreCase(correctanswer))
@@ -379,7 +376,7 @@ public class WhoWantsToBeAMillionare extends Activity {
     public void onOptionCClicked(View view)
     {
         cdt.cancel();
-        mpaudio2.pause();
+        //mpaudio2.pause();
         String value4=b4.getText().toString();
 
         if(value4.equalsIgnoreCase(correctanswer))
@@ -399,7 +396,7 @@ public class WhoWantsToBeAMillionare extends Activity {
     public void onOptionDClicked(View view)
     {
         cdt.cancel();
-        mpaudio2.pause();
+        //mpaudio2.pause();
         String value5=b5.getText().toString();
         if(value5.equalsIgnoreCase(correctanswer))
         {
@@ -419,7 +416,7 @@ public class WhoWantsToBeAMillionare extends Activity {
     public void nextPlayClicked(View view)
     {
         read();
-        mpaudio2.start();
+        //mpaudio2.start();
         afterquestion();
         cdt1.start();
     }
