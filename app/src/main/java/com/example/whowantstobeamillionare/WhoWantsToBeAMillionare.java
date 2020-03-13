@@ -13,46 +13,72 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class WhoWantsToBeAMillionare extends Activity {
-    CountDownTimer generalcdt, cdt1, cdt2, cdt3,countDownTimer;
+
+    CountDownTimer generalcdt, cdt1, cdt2, cdt3, countDownTimer;
     Button time;
     ImageView graph;
 
     String correctanswer;
     //LinearLayout li;
     int j = 0;
+    int correctawnsercounter = 0;
 
-    boolean joker1,joker2,joker3,joker4 = false;
+    boolean joker1, joker2, joker3, joker4 = false;
 
-    Button b1, b2, b3, b4, b5, playnext,j1,j2,j3,j4;
+    Button b1, b2, b3, b4, b5, playnext, j1, j2, j3, j4;
     TextView resulttextview;
+    int i = 0;
 
-    //MediaPlayer mpaudio,mpaudio1,mpaudio2;
+    MediaPlayer mpaudio, mpaudio1, mpaudio2;
 
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.whowantstobeamillionare);
 
-        //mpaudio= MediaPlayer.create(this,R.drawable.);
-        //mpaudio.start();
+        Button button1 = (Button) findViewById(R.id.buttonBack);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, MainActivity.class);
+                startActivityForResult(activityStart, 1);
+            }
+        });
+        Button button2 = (Button) findViewById(R.id.buttonSettings);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, Options.class);
+                startActivityForResult(activityStart, 1);
+            }
+        });
+
+        mpaudio = MediaPlayer.create(this, R.raw.ticktock);
+        mpaudio.start();
 
         //mpaudio1= MediaPlayer.create(this,R.drawable.clock_ti);
+        fillermehtod();
 
         populatelistview();
 
 
         graph = (ImageView) findViewById(R.id.graph);
         time = (Button) findViewById(R.id.buttonClock);
-        //mpaudio.setOnCompletionListener((MediaPlayer.OnCompletionListener) this);
+        mpaudio.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mpaudio.start();
+            }
+        });
 
         b1 = (Button) findViewById(R.id.bquestion);
         b2 = (Button) findViewById(R.id.boptiona);
@@ -60,13 +86,13 @@ public class WhoWantsToBeAMillionare extends Activity {
         b4 = (Button) findViewById(R.id.boptionc);
         b5 = (Button) findViewById(R.id.boptiond);
         playnext = (Button) findViewById(R.id.buttonNext);
-        j1 = (Button)findViewById(R.id.buttonfiftyfifty);
-        j2 = (Button)findViewById(R.id.buttonPhone);
-        j3 = (Button)findViewById(R.id.buttonaudience);
-        j4 = (Button)findViewById(R.id.buttonflip);
+        j1 = findViewById(R.id.buttonfiftyfifty);
+        j2 = (Button) findViewById(R.id.buttonPhone);
+        j3 = (Button) findViewById(R.id.buttonaudience);
+        j4 = (Button) findViewById(R.id.buttonflip);
 
         //li=(LinearLayout)findViewById(R.id.interior4);
-        resulttextview = (TextView) findViewById(R.id.textresult);
+        //resulttextview = (TextView) findViewById(R.id.textresult);
         read();
     }
 
@@ -87,7 +113,7 @@ public class WhoWantsToBeAMillionare extends Activity {
             public void onFinish() {
                 //mpaudio1.pause();
                 setContentView(R.layout.endscreen);
-                Intent intent = new Intent(WhoWantsToBeAMillionare.this, Endscreen.class);
+                Intent intent = new Intent(WhoWantsToBeAMillionare.this, EndscreenTimeout.class);
                 startActivity(intent);
                 WhoWantsToBeAMillionare.this.finish();
             }
@@ -108,53 +134,43 @@ public class WhoWantsToBeAMillionare extends Activity {
         //  ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,myitems);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_view, myitems);
         ListView list = (ListView) findViewById(R.id.listViewMain);
-
         list.setAdapter(adapter);
 
     }
 
 
-
-
-
-    public void onFiftyfifty(View view)
-    {
-        Button b=(Button)findViewById(R.id.buttonfiftyfifty);
+    public void onFiftyfifty(View view) {
+        Button b = (Button) findViewById(R.id.buttonfiftyfifty);
         b.setBackgroundResource(R.drawable.custom_cancelfiftyfifty);
         b.setEnabled(false);
-        joker1 =true;
+        joker1 = true;
 
-        String value2=b2.getText().toString();   String value3=b3.getText().toString(); String value4=b4.getText().toString(); String value5=b5.getText().toString();
+        String value2 = b2.getText().toString();
+        String value3 = b3.getText().toString();
+        String value4 = b4.getText().toString();
+        String value5 = b5.getText().toString();
 
-        if(value2.equalsIgnoreCase(correctanswer))
-        {
+        if (value2.equalsIgnoreCase(correctanswer)) {
             b3.setText("");
             b4.setText("");
-        }
-        else if(value3.equalsIgnoreCase(correctanswer))
-        {
+        } else if (value3.equalsIgnoreCase(correctanswer)) {
             b2.setText("");
             b5.setText("");
-        }
-        else if(value4.equalsIgnoreCase(correctanswer))
-        {
+        } else if (value4.equalsIgnoreCase(correctanswer)) {
             b2.setText("");
             b5.setText("");
-        }
-        else if(value5.equalsIgnoreCase(correctanswer))
-        {
+        } else if (value5.equalsIgnoreCase(correctanswer)) {
             b3.setText("");
             b4.setText("");
         }
 
     }
-    public void onPhoneAfriend(View view)
 
-    {
-        Button b=(Button)findViewById(R.id.buttonPhone);
+    public void onPhoneAfriend(View view) {
+        Button b = (Button) findViewById(R.id.buttonPhone);
         b.setBackgroundResource(R.drawable.custom_cancelphoneafreind);
         b.setEnabled(false);
-        joker2=true;
+        joker2 = true;
 
         Intent intent = new Intent(Intent.ACTION_DIAL);
         startActivity(intent);
@@ -183,47 +199,40 @@ public class WhoWantsToBeAMillionare extends Activity {
             }
         };
     }
-        public void onAudiencepoll(View view)
-        {
-            Button b=(Button)findViewById(R.id.buttonaudience);
-            b.setBackgroundResource(R.drawable.custom_cancelaudiencepoll);
-            b.setEnabled(false);
-            joker3 =true;
 
-            String value2=b2.getText().toString();   String value3=b3.getText().toString(); String value4=b4.getText().toString(); String value5=b5.getText().toString();
+    public void onAudiencepoll(View view) {
+        Button b = (Button) findViewById(R.id.buttonaudience);
+        b.setBackgroundResource(R.drawable.custom_cancelaudiencepoll);
+        b.setEnabled(false);
+        joker3 = true;
 
-            if(value2.equalsIgnoreCase(correctanswer))
-            {
-                graph.setBackgroundResource(R.drawable.a);
-                graph.setVisibility(View.VISIBLE);
-                // li.setBackgroundResource(R.drawable.a);
-            }
-            else if(value3.equalsIgnoreCase(correctanswer))
-            {
-                graph.setBackgroundResource(R.drawable.b);
-                graph.setVisibility(View.VISIBLE);
-                // li.setBackgroundResource(R.drawable.b);
-            }
-            else if(value4.equalsIgnoreCase(correctanswer))
-            {
-                graph.setBackgroundResource(R.drawable.c);
-                graph.setVisibility(View.VISIBLE);
-                //li.setBackgroundResource(R.drawable.c);
-            }
-            else if(value5.equalsIgnoreCase(correctanswer))
-            {
-                graph.setBackgroundResource(R.drawable.d);
-                graph.setVisibility(View.VISIBLE);
-                // li.setBackgroundResource(R.drawable.d);
-            }
+        String value2 = b2.getText().toString();
+        String value3 = b3.getText().toString();
+        String value4 = b4.getText().toString();
+        String value5 = b5.getText().toString();
 
-            disapperaimage();
-            cdt2.start();
+        if (value2.equalsIgnoreCase(correctanswer)) {
+            graph.setBackgroundResource(R.drawable.a);
+            graph.setVisibility(View.VISIBLE);
+            // li.setBackgroundResource(R.drawable.a);
+        } else if (value3.equalsIgnoreCase(correctanswer)) {
+            graph.setBackgroundResource(R.drawable.b);
+            graph.setVisibility(View.VISIBLE);
+            // li.setBackgroundResource(R.drawable.b);
+        } else if (value4.equalsIgnoreCase(correctanswer)) {
+            graph.setBackgroundResource(R.drawable.c);
+            graph.setVisibility(View.VISIBLE);
+            //li.setBackgroundResource(R.drawable.c);
+        } else if (value5.equalsIgnoreCase(correctanswer)) {
+            graph.setBackgroundResource(R.drawable.d);
+            graph.setVisibility(View.VISIBLE);
+            // li.setBackgroundResource(R.drawable.d);
         }
+    }
 
-    private void disapperaimage()
-    {
-        cdt2 = new CountDownTimer(5000, 1000)
+    private void disapperaimage() {
+        graph.setVisibility(View.INVISIBLE);
+        /*cdt2 = new CountDownTimer(5000, 1000)
         {
             // int s;
 
@@ -240,16 +249,17 @@ public class WhoWantsToBeAMillionare extends Activity {
             public void onFinish()
             {
 
-                graph.setVisibility(View.INVISIBLE);
+
                 cdt2.cancel();
 
             }
         };
+
+         */
     }
 
-    public void onFlip(View view)
-    {
-        Button b=(Button)findViewById(R.id.buttonflip);
+    public void onFlip(View view) {
+        Button b = (Button) findViewById(R.id.buttonflip);
         b.setBackgroundResource(R.drawable.custom_cancelflip);
         b.setEnabled(false);
         joker4 = true;
@@ -258,36 +268,65 @@ public class WhoWantsToBeAMillionare extends Activity {
     }
 
 
-    public void onCompletion(MediaPlayer mediaPlayer)
-    {
+    public void onCompletion(MediaPlayer mediaPlayer) {
         //mpaudio2= MediaPlayer.create(this,R.drawable.);
         //mpaudio2.start();
     }
 
-    public static int newNumber() {
-        Random rand = new Random();
-        int randomNumber = rand.nextInt(23);
+    private ArrayList<Integer> arrayList = new ArrayList<Integer>(15);
 
-        return randomNumber;
+    public void fillermehtod() {
+        while (arrayList.size() < 23) {
+            int x = newNumber();
+            if (arrayList.contains(x)) {
+                continue;
+            }
+            arrayList.add(x);
+        }
     }
 
 
+    //
+    public int generateNumber() {
+        int element = arrayList.get(i);
+        return element;
+    }
 
-    public void read()
-    {
-        j = newNumber();
+
+    //generates random number duplicates possible
+    public static int newNumber() {
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(23);
+        return randomNumber;
+    }
+
+    public void disableButtons() {
+        b2.setEnabled(false);
+        b3.setEnabled(false);
+        b4.setEnabled(false);
+        b5.setEnabled(false);
+        j1.setEnabled(false);
+        j2.setEnabled(false);
+        j3.setEnabled(false);
+        j4.setEnabled(false);
+    }
+
+
+    public void read() {
+        j = generateNumber();
+        i++;
         setupCountDown();
         generalcdt.start();
 
         SAXBuilder builder = new SAXBuilder();
 
         //File xmlFile = new File(R.xml.test);
-        AssetManager assets=getAssets();
+        AssetManager assets = getAssets();
 
         //  File xmlFile = new File(getFilesDir(),"assets/test.xml");
 
         try {
-            InputStream in=assets.open("question.xml");
+            InputStream in = assets.open("question.xml");
 
             Document document = (Document) builder.build(in);
             Element rootNode = document.getRootElement();
@@ -316,51 +355,43 @@ public class WhoWantsToBeAMillionare extends Activity {
             b5.setText(node.getChildText("optiond"));
 
             //System.out.println("Correct Answer : " + node.getChildText("correctanswer"));
-            correctanswer=(node.getChildText("correctanswer")).toString();
+            correctanswer = (node.getChildText("correctanswer")).toString();
 
             System.out.println(correctanswer);
             //  }
 
 
-        }
-        catch (Exception io)
-        {
+        } catch (Exception io) {
             System.out.println(io.getMessage());
         }
 
 
-
-
     }
 
-    public void onOptionAClicked(View view)
-    {
+    public void onOptionAClicked(View view) {
         generalcdt.cancel();
         //mpaudio2.pause();
-        String value2=b2.getText().toString();
-        b2.setEnabled(false);
-        b3.setEnabled(false);
-        b4.setEnabled(false);
-        b5.setEnabled(false);
-        j1.setEnabled(false);
-        j2.setEnabled(false);
-        j3.setEnabled(false);
-        j4.setEnabled(false);
+        String value2 = b2.getText().toString();
+        disableButtons();
 
-        if(value2.equalsIgnoreCase(correctanswer))
-        {
-            Button b2=(Button)findViewById(R.id.boptiona);
+
+        if (value2.equalsIgnoreCase(correctanswer) && correctawnsercounter != 14) {
+            Button b2 = (Button) findViewById(R.id.boptiona);
             b2.setBackgroundResource(R.drawable.buttongreen);
             playnext.setVisibility(View.VISIBLE);
-        }
-        else {
-            Button b2=(Button)findViewById(R.id.boptiona);
+            correctawnsercounter++;
+        } else if (value2.equalsIgnoreCase(correctanswer) && correctawnsercounter == 14) {
+            Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, MillionareEndsceen.class);
+            startActivityForResult(activityStart, 1);
+        } else {
+            Button b2 = (Button) findViewById(R.id.boptiona);
             b2.setBackgroundResource(R.drawable.buttonorange);
 
             countDownTimer = new CountDownTimer(3000, 1000) {
                 public void onTick(long millisUntilFinished) {
 
                 }
+
                 public void onFinish() {
                     Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, Endscreen.class);
                     startActivityForResult(activityStart, 1);
@@ -370,139 +401,118 @@ public class WhoWantsToBeAMillionare extends Activity {
 
 
     }
-    public void onOptionBClicked(View view)
-    {
+
+    public void onOptionBClicked(View view) {
         generalcdt.cancel();
         //mpaudio2.pause();
-        String value3=b3.getText().toString();
-        b2.setEnabled(false);
-        b3.setEnabled(false);
-        b4.setEnabled(false);
-        b5.setEnabled(false);
-        j1.setEnabled(false);
-        j2.setEnabled(false);
-        j3.setEnabled(false);
-        j4.setEnabled(false);
+        String value3 = b3.getText().toString();
+        disableButtons();
 
-        if(value3.equalsIgnoreCase(correctanswer))
-        {
-            Button b3=(Button)findViewById(R.id.boptionb);
+
+        if (value3.equalsIgnoreCase(correctanswer) && correctawnsercounter != 14) {
+            Button b3 = (Button) findViewById(R.id.boptionb);
             b3.setBackgroundResource(R.drawable.buttongreen);
             playnext.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            Intent activityStart = new Intent(WhoWantsToBeAMillionare.this,Endscreen.class);
-            startActivityForResult(activityStart,1);
+            correctawnsercounter++;
+        } else if (value3.equalsIgnoreCase(correctanswer) && correctawnsercounter == 14) {
+            Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, MillionareEndsceen.class);
+            startActivityForResult(activityStart, 1);
+        } else {
+            Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, Endscreen.class);
+            startActivityForResult(activityStart, 1);
         }
     }
 
-    public void onOptionCClicked(View view)
-    {
+    public void onOptionCClicked(View view) {
         generalcdt.cancel();
         //mpaudio2.pause();
-        String value4=b4.getText().toString();
-        b2.setEnabled(false);
-        b3.setEnabled(false);
-        b4.setEnabled(false);
-        b5.setEnabled(false);
-        j1.setEnabled(false);
-        j2.setEnabled(false);
-        j3.setEnabled(false);
-        j4.setEnabled(false);
+        String value4 = b4.getText().toString();
+        disableButtons();
 
-        if(value4.equalsIgnoreCase(correctanswer))
-        {
-            Button b4=(Button)findViewById(R.id.boptionc);
+        if (value4.equalsIgnoreCase(correctanswer) && correctawnsercounter != 14) {
+            Button b4 = (Button) findViewById(R.id.boptionc);
             b4.setBackgroundResource(R.drawable.buttongreen);
             playnext.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            Intent activityStart = new Intent(WhoWantsToBeAMillionare.this,Endscreen.class);
-            startActivityForResult(activityStart,1);
+            correctawnsercounter++;
+        } else if (value4.equalsIgnoreCase(correctanswer) && correctawnsercounter == 14) {
+            Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, MillionareEndsceen.class);
+            startActivityForResult(activityStart, 1);
+        } else {
+            Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, Endscreen.class);
+            startActivityForResult(activityStart, 1);
         }
     }
 
-    public void onOptionDClicked(View view)
-    {
+    public void onOptionDClicked(View view) {
         generalcdt.cancel();
         //mpaudio2.pause();
-        String value5=b5.getText().toString();
-        b2.setEnabled(false);
-        b3.setEnabled(false);
-        b4.setEnabled(false);
-        b5.setEnabled(false);
-        j1.setEnabled(false);
-        j2.setEnabled(false);
-        j3.setEnabled(false);
-        j4.setEnabled(false);
+        String value5 = b5.getText().toString();
+        disableButtons();
 
-        if(value5.equalsIgnoreCase(correctanswer))
-        {
-            Button b2=(Button)findViewById(R.id.boptiond);
+        if (value5.equalsIgnoreCase(correctanswer) && correctawnsercounter != 14) {
+            Button b2 = (Button) findViewById(R.id.boptiond);
             b2.setBackgroundResource(R.drawable.buttongreen);
             playnext.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            Intent activityStart = new Intent(WhoWantsToBeAMillionare.this,Endscreen.class);
-            startActivityForResult(activityStart,1);
+            correctawnsercounter++;
+        } else if (value5.equalsIgnoreCase(correctanswer) && correctawnsercounter == 14) {
+            Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, MillionareEndsceen.class);
+            startActivityForResult(activityStart, 1);
+        } else {
+            Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, Endscreen.class);
+            startActivityForResult(activityStart, 1);
         }
 
     }
 
-    public void nextPlayClicked(View view)
-    {
+    public void nextPlayClicked(View view) {
         read();
         //mpaudio2.start();
         playnext.setVisibility(View.INVISIBLE);
+
+        disapperaimage();
         b2.setEnabled(true);
         b3.setEnabled(true);
         b4.setEnabled(true);
         b5.setEnabled(true);
-        if(!joker1){
+        if (!joker1) {
             j1.setEnabled(true);
-        }else{
+        } else {
             j1.setEnabled(false);
         }
-        if(!joker2){
+        if (!joker2) {
             j2.setEnabled(true);
-        }else{
+        } else {
             j2.setEnabled(false);
         }
-        if(!joker3){
+        if (!joker3) {
             j3.setEnabled(true);
-        }else{
+        } else {
             j3.setEnabled(false);
         }
-        if(!joker4){
+        if (!joker4) {
             j4.setEnabled(true);
-        }else{
+        } else {
             j4.setEnabled(false);
         }
 
-        Button b2=(Button)findViewById(R.id.boptiona);
+        Button b2 = (Button) findViewById(R.id.boptiona);
         b2.setBackgroundResource(R.drawable.buttonblue);
-        Button b3=(Button)findViewById(R.id.boptionb);
+        Button b3 = (Button) findViewById(R.id.boptionb);
         b3.setBackgroundResource(R.drawable.buttonblue);
-        Button b4=(Button)findViewById(R.id.boptionc);
+        Button b4 = (Button) findViewById(R.id.boptionc);
         b4.setBackgroundResource(R.drawable.buttonblue);
-        Button b5=(Button)findViewById(R.id.boptiond);
+        Button b5 = (Button) findViewById(R.id.boptiond);
         b5.setBackgroundResource(R.drawable.buttonblue);
         afterquestion();
         cdt1.start();
     }
 
-    public void afterquestion()
-    {
+    public void afterquestion() {
 
-        cdt1 = new CountDownTimer(5000, 1000)
-        {
+        cdt1 = new CountDownTimer(5000, 1000) {
             // int s;
 
-            public void onTick(long millisUntilFinished)
-            {
+            public void onTick(long millisUntilFinished) {
                 // time.setText("" + millisUntilFinished / 1000);
                 // s=(int)millisUntilFinished/1000;
                 // System.out.println("This is the time"+s);
@@ -510,8 +520,7 @@ public class WhoWantsToBeAMillionare extends Activity {
 
             }
 
-            public void onFinish()
-            {
+            public void onFinish() {
 
                 cdt1.cancel();
             }

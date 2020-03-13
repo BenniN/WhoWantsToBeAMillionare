@@ -25,7 +25,7 @@
         android:layout_height="98dp"
         android:background="@drawable/backgroundlist"
         android:gravity="center"
-        android:text="Sorry, Wrong Awnser!"
+        android:text="Time is up!"
         android:textSize="30sp"
         android:textStyle="bold" />
 

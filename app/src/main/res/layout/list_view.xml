@@ -10,7 +10,7 @@
     android:paddingTop="2dp"
     android:textAlignment="gravity"
     android:textColor="#FFFFFF"
-    android:textSize="12sp">
+    android:textSize="11sp">
 
 
 </TextView>

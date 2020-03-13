@@ -2,7 +2,6 @@ package com.example.whowantstobeamillionare;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,7 +28,12 @@ public class MainActivity extends AppCompatActivity {
       button2.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-                Toast.makeText(getBaseContext(),"Need to load last Game!",Toast.LENGTH_LONG).show();
+
+                      Intent activityStart = new Intent(MainActivity.this,MillionareEndsceen.class);
+                      startActivityForResult(activityStart,1);
+
+
+              Toast.makeText(getBaseContext(),"Need to load last Game!",Toast.LENGTH_LONG).show();
           }
       });
 
@@ -42,12 +46,11 @@ public class MainActivity extends AppCompatActivity {
           }
       });
 
-      Button button4 = (Button) findViewById(R.id.buttonQuit);
+      Button button4 = (Button) findViewById(R.id.buttonExitGame);
       button4.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
               finish();
-              System.exit(0);
           }
       });
     }

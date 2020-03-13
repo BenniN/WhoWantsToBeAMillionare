@@ -23,7 +23,8 @@
             android:orientation="vertical"
             android:paddingLeft="15dp"
             android:paddingTop="10dp"
-            android:paddingRight="10dp">
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -98,6 +99,9 @@
                 android:layout_height="171dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="3"
+                android:paddingLeft="10dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.863"
@@ -109,7 +113,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="5dp"
+            android:paddingBottom="10dp">
 
             <ListView
                 android:id="@+id/listViewMain"
@@ -124,6 +130,8 @@
         android:id="@+id/linearLayout3"
         android:layout_width="419dp"
         android:layout_height="47dp"
+        android:animationCache="true"
+        android:background="#B43F51B5"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -131,32 +139,35 @@
 
         <Button
             android:id="@+id/buttonBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="25dp"
             android:layout_weight="1"
-            android:text="Button" />
+            android:background="@drawable/buttonback" />
 
         <Button
             android:id="@+id/buttonClock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
             android:layout_margin="0dp"
-            android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
+            android:background="@drawable/buttonclock"
             android:text="Button"
-            android:textColor="#FB0404" />
+            android:textColor="#FB0404"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/buttonSettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="5dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:text="Button" />
+            android:background="@drawable/settingsicon" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -164,6 +175,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
