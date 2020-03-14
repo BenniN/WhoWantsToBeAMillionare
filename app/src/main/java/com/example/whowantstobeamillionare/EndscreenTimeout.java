@@ -11,13 +11,13 @@ public class EndscreenTimeout extends Activity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.timeout);
 
-        Button button1 = (Button) findViewById(R.id.buttonBackEndscreen);
+        Button button1 = findViewById(R.id.buttonBackEndscreen);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent activityStart = new Intent(EndscreenTimeout.this, MainActivity.class);
                 startActivityForResult(activityStart, 1);
-
+                finish();
             }
         });
 

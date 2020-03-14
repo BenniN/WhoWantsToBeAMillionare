@@ -1,60 +1,99 @@
 package com.example.whowantstobeamillionare;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    Options options = new Options();
+    MediaPlayer mainTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.startscreen);
 
-        Button button1 = (Button) findViewById(R.id.buttonStart);
+        Button button1 = findViewById(R.id.buttonStart);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent activityStart = new Intent(MainActivity.this,WhoWantsToBeAMillionare.class);
                 startActivityForResult(activityStart,1);
+                mainTheme.reset();
+                mainTheme.release();
+                finish();
             }
         });
 
-      Button button2 = (Button) findViewById(R.id.buttonLoad);
-      button2.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-
-                      Intent activityStart = new Intent(MainActivity.this,MillionareEndsceen.class);
-                      startActivityForResult(activityStart,1);
 
 
-              Toast.makeText(getBaseContext(),"Need to load last Game!",Toast.LENGTH_LONG).show();
-          }
-      });
-
-      Button button3 = (Button) findViewById(R.id.buttonOptions);
+      Button button3 = findViewById(R.id.buttonOptions);
       button3.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
               Intent activityOptions = new Intent(MainActivity.this, Options.class);
               startActivityForResult(activityOptions,1);
-          }
-      });
-
-      Button button4 = (Button) findViewById(R.id.buttonExitGame);
-      button4.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
+              mainTheme.reset();
+              mainTheme.release();
               finish();
           }
       });
+
+      Button button4 = findViewById(R.id.buttonExitGame);
+      button4.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              mainTheme.reset();mainTheme.release();
+              finish();
+          }
+      });
+
+        mainTheme = MediaPlayer.create(this, R.raw.maintheme);
+        if (options.getBooleanValue()) {
+            mainTheme.start();
+        } else {
+            mainTheme.pause();
+        }
+
+        mainTheme.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mainTheme.start();
+            }
+        });
     }
 
 
 
+/*
+    private void resetTitle() {
+        try {
+            int label = getPackageManager().getActivityInfo(getComponentName(), GET_META_DATA).labelRes;
+            if (label != 0) {
+                setTitle(label);
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        }
+    }
+
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.setLocale(base));
+    }
+
+
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        LocaleManager.setLocale(this);
+    }
+
+ */
 }

@@ -23,9 +23,9 @@
         android:id="@+id/endMessage"
         android:layout_width="match_parent"
         android:layout_height="98dp"
-        android:background="@drawable/backgroundlist"
+        android:background="@drawable/buttonawnserwrong"
         android:gravity="center"
-        android:text="Sorry, Wrong Awnser!"
+        android:text="@string/wrong_answer"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -74,8 +74,8 @@
     <Button
         android:id="@+id/buttonBackEndscreen"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/buttonblue"
-        android:text="Try Again!"
+        android:layout_height="100dp"
+        android:background="@drawable/buttonanswer"
+        android:text="@string/try_again"
         android:textSize="24sp" />
 </LinearLayout>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<company>
+    <Question>
+        <question>Welcher Golfspieler ist als Weißer Hai bekannt?</question>
+        <optiona>A: Greg Norman</optiona>
+        <optionb>B: Woods</optionb>
+        <optionc>C: I.Ballesteros</optionc>
+        <optiond>D: Jack Nicklaus</optiond>
+        <correctanswer>D: Jack Nicklaus</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Welche Zahl stellt der Buchstabe m dar?</question>
+        <optiona>A: 100</optiona>
+        <optionb>B: 1000</optionb>
+        <optionc>C: 500</optionc>
+        <optiond>D: 50</optiond>
+        <correctanswer>B: 1000</correctanswer>
+    </Question>
+
+    <Question>
+        <question>In welcher Stadt befindet sich der Flughafen "Heathrow"?</question>
+        <optiona>A: London</optiona>
+        <optionb>B: Glasgow</optionb>
+        <optionc>C: Dublin</optionc>
+        <optiond>D: Milan</optiond>
+        <correctanswer>A: London</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Wer schrieb "Les Fleurs du Mal"?</question>
+        <optiona>A: Baudelaire</optiona>
+        <optionb>B: Verlaine</optionb>
+        <optionc>C: Flaubert</optionc>
+        <optiond>D: Proust</optiond>
+        <correctanswer>A: Baudelaire</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Was bedeutet "WWW"?</question>
+        <optiona>A: World Wide Web</optiona>
+        <optionb>B: Web Week Web</optionb>
+        <optionc>C: World Wrestling Web</optionc>
+        <optiond>D: We Were Web</optiond>
+        <correctanswer>A: World Wide Web</correctanswer>
+    </Question>
+
+    <Question>
+        <question>In welcher Hauptstadt finden Sie den Zirkus "Piccadilly"?</question>
+        <optiona>A: New York</optiona>
+        <optionb>B: London</optionb>
+        <optionc>C: Dublin</optionc>
+        <optiond>D: Paris</optiond>
+        <correctanswer>B: London</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Wo im menschlichen Körper ist die "Phalanx"?</question>
+        <optiona>A: Im Herz</optiona>
+        <optionb>B: Im Kopf</optionb>
+        <optionc>C: Im Ohr</optionc>
+        <optiond>D: In der Hand</optiond>
+        <correctanswer>D: In der Hand</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Welcher russische Führer hat die "Perestroika" eingeführt?</question>
+        <optiona>A: Marx</optiona>
+        <optionb>B: Putin</optionb>
+        <optionc>C: Stalin</optionc>
+        <optiond>D: Gorbachev</optiond>
+        <correctanswer>D: Gorbachev</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Was ist die Hauptstadt von Russland?</question>
+        <optiona>A: Leningrad</optiona>
+        <optionb>B: Kiew</optionb>
+        <optionc>C: Moskau</optionc>
+        <optiond>D: Orsk</optiond>
+        <correctanswer>C: Moskau</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Wer hat Dynamit erfunden?</question>
+        <optiona>A: Enrico Ferml</optiona>
+        <optionb>B: Albert Einstein</optionb>
+        <optionc>C: Alfred Nobel</optionc>
+        <optiond>D: Benjamin Franklin</optiond>
+        <correctanswer>C: Alfred Nobel</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Wo im menschlichen Körper ist die "Alveole"?</question>
+        <optiona>A: In der Lunge</optiona>
+        <optionb>B: In der Leber</optionb>
+        <optionc>C: Im Herz</optionc>
+        <optiond>D: Im Gehirn</optiond>
+        <correctanswer>A: In der Lunge</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Was ist das Symbol für Gold?</question>
+        <optiona>A: Gd</optiona>
+        <optionb>B: Or</optionb>
+        <optionc>C: Gi</optionc>
+        <optiond>D: Au</optiond>
+        <correctanswer>D: Au</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Wo finden Sie das Stadion "Old Trafford"?</question>
+        <optiona>A: Liverpool</optiona>
+        <optionb>B: Manchester</optionb>
+        <optionc>C: London</optionc>
+        <optiond>D: Madrid</optiond>
+        <correctanswer>B: Manchester</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Wer hat "Dadum tractum cst" gesagt?</question>
+        <optiona>A: Julius Cäsar</optiona>
+        <optionb>B: Jesus</optionb>
+        <optionc>C: Napoleon</optionc>
+        <optiond>D: Hannibal</optiond>
+        <correctanswer>A: Julius Cäsar</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Was ist in römischen Ziffern der Buchstabe "C"?</question>
+        <optiona>A: 75</optiona>
+        <optionb>B: 100</optionb>
+        <optionc>C: 5</optionc>
+        <optiond>D: 1000</optiond>
+        <correctanswer>B: 100</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Wer war der alte ägyptische Sonnengott?</question>
+        <optiona>A: Anubi</optiona>
+        <optionb>B: Ra</optionb>
+        <optionc>C: Horus</optionc>
+        <optiond>D: Anulu</optiond>
+        <correctanswer>B: Ra</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Wenn Sie am 20. November geboren wurden, welches Sternzeichen sind Sie?</question>
+        <optiona>A: Löwe</optiona>
+        <optionb>B: Zwilling</optionb>
+        <optionc>C: Skorpion</optionc>
+        <optiond>D: Schütze</optiond>
+        <correctanswer>C: Skorpion</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Was ist die Währungseinheit in Griechenland?</question>
+        <optiona>A: Euro</optiona>
+        <optionb>B: Drachme</optionb>
+        <optionc>C: Lira</optionc>
+        <optiond>D: Griechischer Dollar</optiond>
+        <correctanswer>A: Euro</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Was ist die Hauptstadt von Bulgarien?</question>
+        <optiona>A: Bucharest</optiona>
+        <optionb>B: Budapest</optionb>
+        <optionc>C: Sofia</optionc>
+        <optiond>D: Kiew</optiond>
+        <correctanswer>C: Sofia</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Was ist die Hauptstadt von Rumänien?</question>
+        <optiona>A: Bucharest</optiona>
+        <optionb>B: Budapest</optionb>
+        <optionc>C: Sofia</optionc>
+        <optiond>D: Kiev</optiond>
+        <correctanswer>A: Bucharest</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Wer war der alte römische Kriegsgott?</question>
+        <optiona>A: Ares</optiona>
+        <optionb>B: Merkur</optionb>
+        <optionc>C: Dionysos</optionc>
+        <optiond>D: Mars</optiond>
+        <correctanswer>D: Mars</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Wer ist Amors Äquivalent in der griechischen Mythologie?</question>
+        <optiona>A: Apollo</optiona>
+        <optionb>B: Eros</optionb>
+        <optionc>C: Saturn</optionc>
+        <optiond>D: Jupiter</optiond>
+        <correctanswer>B: Eros</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Was ist die Farbe des New Yorker Taxis?</question>
+        <optiona>A: Gelb</optiona>
+        <optionb>B: Rot</optionb>
+        <optionc>C: Grün</optionc>
+        <optiond>D: Blau</optiond>
+        <correctanswer>A: Gelb</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Bacchus und Dionysos sind beide die Götter von was?</question>
+        <optiona>A: Wein</optiona>
+        <optionb>B: Weisheit</optionb>
+        <optionc>C: Krieg</optionc>
+        <optiond>D: Der Sonne</optiond>
+        <correctanswer>A: Wein</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Was ist die Währung in Nordirland?</question>
+        <optiona>A: Pfund</optiona>
+        <optionb>B: Euro</optionb>
+        <optionc>C: Dollar</optionc>
+        <optiond>D: Lira</optiond>
+        <correctanswer>A: Pfund</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Wer hat das Kino erfunden?</question>
+        <optiona>A: Brother Cinemas</optiona>
+        <optionb>B: Brother Lumiere</optionb>
+        <optionc>C: Brother Wright</optionc>
+        <optiond>D: Brother Sandish</optiond>
+        <correctanswer>B: Brother Lumiere</correctanswer>
+    </Question>
+
+    <Question>
+        <question>Wer war der Regisseur des Films "E.T."?</question>
+        <optiona>A: A Parker</optiona>
+        <optionb>B: P Jackson</optionb>
+        <optionc>C: R Scott</optionc>
+        <optiond>D: S Spielberg</optiond>
+        <correctanswer>D: S Spielberg</correctanswer>
+    </Question>
+
+</company>

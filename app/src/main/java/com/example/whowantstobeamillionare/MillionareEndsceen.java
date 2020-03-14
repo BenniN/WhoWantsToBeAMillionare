@@ -3,14 +3,12 @@ package com.example.whowantstobeamillionare;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,15 +16,14 @@ import java.util.Date;
 
 public class MillionareEndsceen extends Activity {
 
-        private Button  btnshare;
-        //private ImageView iv;
+    //private ImageView iv;
         private String sharePath="no";
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.millionare);
-            Button button1 = (Button) findViewById(R.id.buttonendscreen);
+            Button button1 = findViewById(R.id.buttonendscreen);
             button1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -38,7 +35,7 @@ public class MillionareEndsceen extends Activity {
             });
 
 
-            btnshare = findViewById(R.id.buttonshare);
+            Button btnshare = findViewById(R.id.buttonshare);
 
             btnshare.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -75,11 +72,10 @@ public class MillionareEndsceen extends Activity {
                 outputStream.close();
 
                 //setting screenshot in imageview
-                String filePath = imageFile.getPath();
 
                 //Bitmap ssbitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
                 //iv.setImageBitmap(ssbitmap);
-                sharePath = filePath;
+                sharePath = imageFile.getPath();
 
             } catch (Throwable e) {
                 // Several error may come out with file handling or DOM

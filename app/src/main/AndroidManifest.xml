@@ -20,6 +20,8 @@
         <activity android:name=".Options"/>
         <activity android:name=".Endscreen"/>
         <activity android:name=".MillionareEndsceen"/>
+        <activity android:name=".EndscreenTimeout"/>
+
     </application>
-<uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 </manifest>

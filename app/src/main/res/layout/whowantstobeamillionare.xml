@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:background="@drawable/bg2">
 
     <LinearLayout
         android:id="@+id/linearLayout5"
@@ -40,8 +40,8 @@
                     android:layout_marginLeft="32dp"
                     android:layout_marginTop="12dp"
                     android:layout_weight="1"
-                    android:background="@drawable/custom_phone"
-                    android:onClick="onPhoneAfriend"
+                    android:background="@drawable/phonejoker"
+                    android:onClick="onPhoneSomeoneClicked"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="parent" />
 
@@ -51,8 +51,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
-                    android:background="@drawable/custom_fifty_fifty"
-                    android:onClick="onFiftyfifty"
+                    android:background="@drawable/fiftyfifty"
+                    android:onClick="onJokerFiftyFiftyClicked"
                     app:layout_constraintStart_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="parent" />
 
@@ -70,8 +70,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
-                    android:background="@drawable/custom_flipquestion"
-                    android:onClick="onFlip"
+                    android:background="@drawable/revertjoker"
+                    android:onClick="onSkipClicked"
                     app:layout_constraintBottom_toTopOf="@+id/guideline"
                     app:layout_constraintStart_toEndOf="@+id/buttonaudience"
                     app:layout_constraintTop_toBottomOf="@+id/buttonfiftyfifty"
@@ -86,8 +86,8 @@
                     android:layout_marginLeft="24dp"
                     android:layout_marginTop="32dp"
                     android:layout_weight="1"
-                    android:background="@drawable/custom_audiencepoll"
-                    android:onClick="onAudiencepoll"
+                    android:background="@drawable/publicjoker"
+                    android:onClick="onAudienceJokerClicked"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/buttonPhone" />
 
@@ -140,11 +140,11 @@
         <Button
             android:id="@+id/buttonBack"
             android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="25dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="40dp"
             android:layout_weight="1"
-            android:background="@drawable/buttonback" />
+            android:background="@drawable/arrow_2" />
 
         <Button
             android:id="@+id/buttonClock"
@@ -153,7 +153,7 @@
             android:layout_margin="0dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:background="@drawable/buttonclock"
+            android:background="@drawable/timer"
             android:text="Button"
             android:textColor="#FB0404"
             android:textSize="24sp"
@@ -164,9 +164,10 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="40dp"
             android:layout_weight="1"
-            android:background="@drawable/settingsicon" />
+            android:background="@drawable/settingsicon"
+            android:visibility="invisible" />
 
     </LinearLayout>
 
@@ -186,7 +187,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="1"
-            android:background="@drawable/buttonblue"
+            android:background="@drawable/buttonquestion"
             android:text=""
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
@@ -197,38 +198,34 @@
         <Button
             android:id="@+id/boptiona"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="-5dp"
             android:layout_weight="1"
-            android:background="@drawable/buttonblue"
+            android:background="@drawable/buttonanswer"
             android:onClick="onOptionAClicked"
             android:text=""
             android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/buttonA"
-            app:layout_constraintTop_toBottomOf="@+id/bquestion" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:id="@+id/boptionb"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="-20dp"
             android:layout_weight="1"
-            android:background="@drawable/buttonblue"
+            android:background="@drawable/buttonanswer"
             android:onClick="onOptionBClicked"
             android:text=""
             android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/buttonB"
-            app:layout_constraintTop_toBottomOf="@+id/boptiona" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:id="@+id/boptionc"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="-20dp"
             android:layout_weight="1"
-            android:background="@drawable/buttonblue"
+            android:background="@drawable/buttonanswer"
             android:onClick="onOptionCClicked"
             android:text=""
             android:textColor="#FFFFFF"
@@ -239,10 +236,10 @@
         <Button
             android:id="@+id/boptiond"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="-20dp"
             android:layout_weight="1"
-            android:background="@drawable/buttonblue"
+            android:background="@drawable/buttonanswer"
             android:onClick="onOptionDClicked"
             android:text=""
             android:textColor="#FFFFFF"
@@ -253,12 +250,12 @@
         <Button
             android:id="@+id/buttonNext"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="-5dp"
             android:layout_weight="1"
-            android:background="@drawable/buttonnext"
+            android:background="@drawable/buttonawnserwrong"
             android:onClick="nextPlayClicked"
-            android:text="Next Question"
+            android:text="@string/next_Question"
             android:textColor="#FFFFFF"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"

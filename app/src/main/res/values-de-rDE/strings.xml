@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wer wird Millionär</string>
+    <string name="start_game">Spiel Starten!</string>
+    <string name="settings_button">Einstellungen</string>
+    <string name="exit">Verlassen</string>
+    <string name="music">Musik</string>
+    <string name="next_Question">Nächste Frage</string>
+    <string name="you_won">Du hast Gewonnen!</string>
+    <string name="language">Sprache</string>
+    <string name="timeisup">Die Zeit ist um!</string>
+    <string name="wrong_answer">Falsche Antwort!</string>
+    <string name="try_again">Versuche es nochmal</string>
+</resources>

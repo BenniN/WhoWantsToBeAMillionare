@@ -11,13 +11,13 @@ public class Endscreen extends Activity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.endscreen);
 
-        Button button1 = (Button) findViewById(R.id.buttonBackEndscreen);
+        Button button1 = findViewById(R.id.buttonBackEndscreen);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent activityStart = new Intent(Endscreen.this, MainActivity.class);
                 startActivityForResult(activityStart, 1);
-
+                finish();
             }
         });
 
