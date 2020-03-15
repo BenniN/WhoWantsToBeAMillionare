@@ -7,7 +7,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -281,7 +280,7 @@ public class WhoWantsToBeAMillionare extends Activity {
         try {
             if (getCurrentLocale().equals("en")) {
 
-                InputStream in = assets.open("question.xml");
+                InputStream in = assets.open("questionfile_en.xml");
                 Document document = builder.build(in);
 
                 Element rootNode = document.getRootElement();
@@ -311,7 +310,7 @@ public class WhoWantsToBeAMillionare extends Activity {
 
             } else if (getCurrentLocale().equals("de")) {
 
-                InputStream in = assets.open("questionde.xml");
+                InputStream in = assets.open("questionfile_de.xml");
                 Document document = builder.build(in);
 
                 Element rootNode = document.getRootElement();
