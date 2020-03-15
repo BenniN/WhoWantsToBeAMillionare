@@ -39,12 +39,14 @@ public class WhoWantsToBeAMillionare extends Activity {
     Button buttonQuestion, buttonOptionA, buttonOptionB, buttonOptionC, buttonOptionD, buttonNext, buttonFiftyFifty, buttonPhoneSomeone, buttonAskAudience, buttonSkipQuestion;
     int elementOfArraylist = 0;
     MediaPlayer clockTickingAudio, applauseAudio;
+    private MySimpleArrayAdapter adapter;
 
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.whowantstobeamillionare);
 
         getCurrentLocale();
+        setupCountDown();
 
         Button button1 = findViewById(R.id.buttonBack);
         button1.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +59,6 @@ public class WhoWantsToBeAMillionare extends Activity {
                 applauseAudio.reset();
                 applauseAudio.release();
                 finish();
-
             }
         });
         Button button2 = findViewById(R.id.buttonSettings);
@@ -111,6 +112,13 @@ public class WhoWantsToBeAMillionare extends Activity {
     public void onPause() {
         super.onPause();
         countdownMainTimer.cancel();
+        clockTickingAudio.pause();
+
+    }
+    public void onResume(){
+        super.onResume();
+        clockTickingAudio.start();
+        countdownMainTimer.start();
     }
 
     private void setupCountDown() {
@@ -141,10 +149,10 @@ public class WhoWantsToBeAMillionare extends Activity {
     }
 
     private void populatelistview() {
-        String[] myitems = {"15  £ 1 Million", "14    £ 500.000", "13    £ 125.000", "12    £ 32.000", "11    £ 32.000",
-                "10    £ 16.000", "9     £ 8.000", "8     £ 4.000", "7     £ 2.000", "6     £ 1.000", "5     £ 500",
-                "4     £ 300", "3     £ 200", "2     £ 100", "1     £ 50"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_view, myitems);
+        String[] myitems = {"15   1 Million", "14     500.000", "13     125.000", "12     32.000", "11     32.000",
+                "10     16.000", "9      8.000", "8      4.000", "7      2.000", "6      1.000", "5      500",
+                "4      300", "3      200", "2      100", "1      50"};
+        adapter = new MySimpleArrayAdapter(this, myitems) {};
         ListView list = findViewById(R.id.listViewMain);
         list.setAdapter(adapter);
     }
@@ -224,10 +232,10 @@ public class WhoWantsToBeAMillionare extends Activity {
         read();
     }
 
-    private ArrayList<Integer> arrayList = new ArrayList<>(15);
+    private ArrayList<Integer> arrayList = new ArrayList<>(16);
 
     public void fillermehtod() {
-        while (arrayList.size() < 15) {
+        while (arrayList.size() < 16) {
             int x = newNumber();
             if (arrayList.contains(x)) {
                 continue;
@@ -261,8 +269,7 @@ public class WhoWantsToBeAMillionare extends Activity {
     public void read() {
         intForNextQuestion = generateNumber();
         elementOfArraylist++;
-        setupCountDown();
-        countdownMainTimer.start();
+
 
         SAXBuilder builder = new SAXBuilder();
 
@@ -514,6 +521,7 @@ public class WhoWantsToBeAMillionare extends Activity {
 
     public void nextPlayClicked(View view) {
         read();
+        countdownMainTimer.start();
         if (options.getBooleanValue()) {
             clockTickingAudio.start();
         }
@@ -554,5 +562,7 @@ public class WhoWantsToBeAMillionare extends Activity {
         b4.setBackgroundResource(R.drawable.buttonanswer);
         Button b5 = findViewById(R.id.boptiond);
         b5.setBackgroundResource(R.drawable.buttonanswer);
+
+        adapter.setCurrentPosition(14 - correctAnswerCounter);
     }
 }

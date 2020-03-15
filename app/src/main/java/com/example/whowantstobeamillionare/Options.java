@@ -9,7 +9,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 public class Options extends Activity {
-    private static boolean musicOnOrOff = true;
+    private static boolean musicOnOrOff = false;
 
 
     public void onCreate(Bundle saveInstanceState) {
@@ -38,12 +38,12 @@ public class Options extends Activity {
 */
 
         Switch switch1 = findViewById(R.id.switchMusic);
-
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 musicOnOrOff = isChecked;
             }
         });
+
         switch1.setChecked(musicOnOrOff);
     }
 

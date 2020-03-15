@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent activityStart = new Intent(MainActivity.this,WhoWantsToBeAMillionare.class);
                 startActivityForResult(activityStart,1);
-                mainTheme.reset();
+               mainTheme.reset();
                 mainTheme.release();
                 finish();
             }
@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
         if (options.getBooleanValue()) {
             mainTheme.start();
         } else {
-            mainTheme.pause();
+            mainTheme.reset();
+            mainTheme.release();
         }
 
         mainTheme.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -65,6 +66,15 @@ public class MainActivity extends AppCompatActivity {
                 mainTheme.start();
             }
         });
+    }
+
+    public void onPause(){
+        super.onPause();
+        mainTheme.reset();
+        mainTheme.release();
+    }
+    public void onResume(){
+        super.onResume();
     }
 
 
