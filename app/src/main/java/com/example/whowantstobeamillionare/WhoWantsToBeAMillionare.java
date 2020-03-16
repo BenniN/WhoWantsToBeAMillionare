@@ -22,22 +22,30 @@ import java.util.Locale;
 import java.util.Random;
 
 public class WhoWantsToBeAMillionare extends Activity {
-
+    //to know if the switch has the value true or false
     Options options = new Options();
-
+    //setup timers
     CountDownTimer countdownMainTimer, countdownWrongQuestion;
+    // in there the time is displayed
     Button time;
+    // init to display the graph
     ImageView imageViewAudienceAnswer;
 
+    //to know what was the correct answer after clicking
     String correctanswer;
+    // int which will take the numbers out of the arraylist to display non dupicate random questions
     int intForNextQuestion = 0;
-
+    //needed to set a counter to win after 14 questions
     int correctAnswerCounter = 0;
+    //if a answer has been pressed i don't want the user to click on certain jokers, so to make sure that the correct accesability is set on a new question
     boolean joker1, joker2, joker3, joker4 = false;
-
+    //all interaction buttons
     Button buttonQuestion, buttonOptionA, buttonOptionB, buttonOptionC, buttonOptionD, buttonNext, buttonFiftyFifty, buttonPhoneSomeone, buttonAskAudience, buttonSkipQuestion;
+    //go to the next element of the arraylist
     int elementOfArraylist = 0;
+    //initialize Mediaplayer for clock ticking and applause audio
     MediaPlayer clockTickingAudio, applauseAudio;
+    //initialize the list view
     private MySimpleArrayAdapter adapter;
 
     public void onCreate(Bundle saveInstanceState) {
@@ -53,10 +61,8 @@ public class WhoWantsToBeAMillionare extends Activity {
             public void onClick(View v) {
                 Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, MainActivity.class);
                 startActivityForResult(activityStart, 1);
-                clockTickingAudio.reset();
-                clockTickingAudio.release();
-                applauseAudio.reset();
-                applauseAudio.release();
+                clockTickingAudio.pause();
+                applauseAudio.pause();
                 finish();
             }
         });
@@ -120,6 +126,9 @@ public class WhoWantsToBeAMillionare extends Activity {
         countdownMainTimer.start();
     }
 
+    /**
+     * set up main countdown for each question
+     */
     private void setupCountDown() {
         countdownMainTimer = new CountDownTimer(50000, 1000) {
 
@@ -147,6 +156,9 @@ public class WhoWantsToBeAMillionare extends Activity {
         }
     }
 
+    /**
+     * these are the lines of which the listview consists
+     */
     private void populatelistview() {
         String[] myitems = {"15   1 Million", "14     500.000", "13     125.000", "12     32.000", "11     32.000",
                 "10     16.000", "9      8.000", "8      4.000", "7      2.000", "6      1.000", "5      500",
@@ -155,6 +167,11 @@ public class WhoWantsToBeAMillionare extends Activity {
         ListView list = findViewById(R.id.listViewMain);
         list.setAdapter(adapter);
     }
+
+    /**
+     * Will remain to answers with the correct answer included, and also display nothing to two possible wrong answers
+     * @param view updates the picture to a used joker
+     */
 
     public void onJokerFiftyFiftyClicked(View view) {
         Button b = findViewById(R.id.buttonfiftyfifty);
@@ -182,6 +199,11 @@ public class WhoWantsToBeAMillionare extends Activity {
         }
     }
 
+    /**
+     * will open the phone activity to call someone
+     * @param view  updates the picture to a used joker
+     */
+
     public void onPhoneSomeoneClicked(View view) {
         Button b = findViewById(R.id.buttonPhone);
         b.setBackgroundResource(R.drawable.jokerphonex);
@@ -192,6 +214,10 @@ public class WhoWantsToBeAMillionare extends Activity {
         startActivity(intent);
     }
 
+    /**
+     * will display a picture where you will see four graphs, depending on the correct answer the picture will show the highest percentage or the correct answer
+     * @param view  updates the picture to a used joker
+     */
     public void onAudienceJokerClicked(View view) {
         Button b = findViewById(R.id.buttonaudience);
         b.setBackgroundResource(R.drawable.jokerpublicx);
@@ -218,6 +244,9 @@ public class WhoWantsToBeAMillionare extends Activity {
         }
     }
 
+    /**
+     * lets the image view disappear
+     */
     private void disapperImage() {
         imageViewAudienceAnswer.setVisibility(View.INVISIBLE);
     }
@@ -231,8 +260,14 @@ public class WhoWantsToBeAMillionare extends Activity {
         read();
     }
 
+    /**
+     * a public array list where 16 numbers between 0 and 27 are randomly displayed
+     */
     private ArrayList<Integer> arrayList = new ArrayList<>(16);
 
+    /**
+     * to fill the arraylist this method is needed. it will only add a new random number when ths number isn't already in the list - so we will not have any duplicates
+     */
     public void fillermehtod() {
         while (arrayList.size() < 16) {
             int x = newNumber();
@@ -265,6 +300,10 @@ public class WhoWantsToBeAMillionare extends Activity {
         buttonSkipQuestion.setEnabled(false);
     }
 
+    /**
+     * this function will use the external library jdom After generating a new SAX builder it will read out the input of the xml files
+     * and displays them into the layouts provided
+     */
     public void read() {
         intForNextQuestion = generateNumber();
         elementOfArraylist++;
@@ -501,6 +540,10 @@ public class WhoWantsToBeAMillionare extends Activity {
 
     }
 
+    /**
+     * this button will lead to the next question
+     * @param view sets visibility of the button
+     */
     public void nextPlayClicked(View view) {
         read();
         countdownMainTimer.start();

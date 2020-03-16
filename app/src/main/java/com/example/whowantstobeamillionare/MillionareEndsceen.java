@@ -17,7 +17,7 @@ import java.util.Date;
 public class MillionareEndsceen extends Activity {
 
     //private ImageView iv;
-        private String sharePath="no";
+        //private String sharePath="no";
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class MillionareEndsceen extends Activity {
                 }
             });
 
-
+/*
             Button btnshare = findViewById(R.id.buttonshare);
 
             btnshare.setOnClickListener(new View.OnClickListener() {
@@ -47,8 +47,10 @@ public class MillionareEndsceen extends Activity {
                 }
             });
 
-        }
+ */
 
+        }
+/*
         private void takeScreenshot() {
             Date now = new Date();
             android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
@@ -94,4 +96,6 @@ public class MillionareEndsceen extends Activity {
             startActivity(intent );
 
         }
+
+ */
 }

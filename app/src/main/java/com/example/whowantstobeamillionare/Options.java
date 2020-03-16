@@ -47,7 +47,7 @@ public class Options extends Activity {
         switch1.setChecked(musicOnOrOff);
     }
 
-    public boolean getBooleanValue() {
+    public static boolean getBooleanValue() {
         return musicOnOrOff;
     }
 /*

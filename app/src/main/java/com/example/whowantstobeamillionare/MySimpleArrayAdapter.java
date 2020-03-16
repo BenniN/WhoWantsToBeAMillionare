@@ -23,6 +23,9 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
         notifyDataSetChanged();
     }
 
+    /**
+     * sets the background colour of a specif line.
+     */
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

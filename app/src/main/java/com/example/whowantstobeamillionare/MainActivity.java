@@ -23,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent activityStart = new Intent(MainActivity.this, WhoWantsToBeAMillionare.class);
                 startActivityForResult(activityStart, 1);
-                mainTheme.reset();
-                mainTheme.release();
+                mainTheme.pause();
                 finish();
             }
         });
@@ -34,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent activityOptions = new Intent(MainActivity.this, Options.class);
                 startActivityForResult(activityOptions, 1);
-                mainTheme.reset();
-                mainTheme.release();
+                mainTheme.pause();
                 finish();
             }
         });
@@ -43,8 +41,7 @@ public class MainActivity extends AppCompatActivity {
         exitGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainTheme.reset();
-                mainTheme.release();
+                mainTheme.pause();
                 finish();
             }
         });
@@ -52,8 +49,7 @@ public class MainActivity extends AppCompatActivity {
         if (options.getBooleanValue()) {
             mainTheme.start();
         } else {
-            mainTheme.reset();
-            mainTheme.release();
+            mainTheme.pause();
         }
 
         mainTheme.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -66,12 +62,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void onPause() {
         super.onPause();
-        mainTheme.reset();
-        mainTheme.release();
+        mainTheme.pause();
     }
 
     public void onResume() {
         super.onResume();
+        mainTheme.start();
     }
 
 
