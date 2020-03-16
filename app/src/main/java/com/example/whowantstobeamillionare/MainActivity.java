@@ -17,41 +17,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.startscreen);
 
-        Button button1 = findViewById(R.id.buttonStart);
-        button1.setOnClickListener(new View.OnClickListener() {
+        Button startGame = findViewById(R.id.buttonStart);
+        startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent activityStart = new Intent(MainActivity.this,WhoWantsToBeAMillionare.class);
-                startActivityForResult(activityStart,1);
-               mainTheme.reset();
+                Intent activityStart = new Intent(MainActivity.this, WhoWantsToBeAMillionare.class);
+                startActivityForResult(activityStart, 1);
+                mainTheme.reset();
                 mainTheme.release();
                 finish();
             }
         });
-
-
-
-      Button button3 = findViewById(R.id.buttonOptions);
-      button3.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              Intent activityOptions = new Intent(MainActivity.this, Options.class);
-              startActivityForResult(activityOptions,1);
-              mainTheme.reset();
-              mainTheme.release();
-              finish();
-          }
-      });
-
-      Button button4 = findViewById(R.id.buttonExitGame);
-      button4.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              mainTheme.reset();mainTheme.release();
-              finish();
-          }
-      });
-
+        Button gotoSettings = findViewById(R.id.buttonOptions);
+        gotoSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activityOptions = new Intent(MainActivity.this, Options.class);
+                startActivityForResult(activityOptions, 1);
+                mainTheme.reset();
+                mainTheme.release();
+                finish();
+            }
+        });
+        Button exitGame = findViewById(R.id.buttonExitGame);
+        exitGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainTheme.reset();
+                mainTheme.release();
+                finish();
+            }
+        });
         mainTheme = MediaPlayer.create(this, R.raw.maintheme);
         if (options.getBooleanValue()) {
             mainTheme.start();
@@ -68,12 +64,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onPause(){
+    public void onPause() {
         super.onPause();
         mainTheme.reset();
         mainTheme.release();
     }
-    public void onResume(){
+
+    public void onResume() {
         super.onResume();
     }
 

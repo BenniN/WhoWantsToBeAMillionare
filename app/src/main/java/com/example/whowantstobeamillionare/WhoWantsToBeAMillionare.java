@@ -204,16 +204,16 @@ public class WhoWantsToBeAMillionare extends Activity {
         String value5 = buttonOptionD.getText().toString();
 
         if (value2.equalsIgnoreCase(correctanswer)) {
-            imageViewAudienceAnswer.setBackgroundResource(R.drawable.a);
+            imageViewAudienceAnswer.setBackgroundResource(R.drawable.agraph);
             imageViewAudienceAnswer.setVisibility(View.VISIBLE);
         } else if (value3.equalsIgnoreCase(correctanswer)) {
-            imageViewAudienceAnswer.setBackgroundResource(R.drawable.b);
+            imageViewAudienceAnswer.setBackgroundResource(R.drawable.bgraph);
             imageViewAudienceAnswer.setVisibility(View.VISIBLE);
         } else if (value4.equalsIgnoreCase(correctanswer)) {
-            imageViewAudienceAnswer.setBackgroundResource(R.drawable.c);
+            imageViewAudienceAnswer.setBackgroundResource(R.drawable.cgraph);
             imageViewAudienceAnswer.setVisibility(View.VISIBLE);
         } else if (value5.equalsIgnoreCase(correctanswer)) {
-            imageViewAudienceAnswer.setBackgroundResource(R.drawable.d);
+            imageViewAudienceAnswer.setBackgroundResource(R.drawable.dgraph);
             imageViewAudienceAnswer.setVisibility(View.VISIBLE);
         }
     }
@@ -268,44 +268,27 @@ public class WhoWantsToBeAMillionare extends Activity {
     public void read() {
         intForNextQuestion = generateNumber();
         elementOfArraylist++;
-
-
         SAXBuilder builder = new SAXBuilder();
-
-        //File xmlFile = new File(R.xml.test);
         AssetManager assets = getAssets();
-
-        //  File xmlFile = new File(getFilesDir(),"assets/test.xml");
 
         try {
             if (getCurrentLocale().equals("en")) {
-
                 InputStream in = assets.open("questionfile_en.xml");
                 Document document = builder.build(in);
-
                 Element rootNode = document.getRootElement();
-
                 List<Element> list = rootNode.getChildren("Question");
-
                 Element node = list.get(intForNextQuestion);
-
                 System.out.println("Question : " + node.getChildText("question"));
                 buttonQuestion.setText(node.getChildText("question"));
-
                 System.out.println("option A : " + node.getChildText("optiona"));
                 buttonOptionA.setText(node.getChildText("optiona"));
-
                 System.out.println("option B : " + node.getChildText("optionb"));
                 buttonOptionB.setText(node.getChildText("optionb"));
-
                 System.out.println("option C : " + node.getChildText("optionc"));
                 buttonOptionC.setText(node.getChildText("optionc"));
-
                 System.out.println("option D : " + node.getChildText("optiond"));
                 buttonOptionD.setText(node.getChildText("optiond"));
-
                 correctanswer = (node.getChildText("correctanswer"));
-
                 System.out.println(correctanswer);
 
             } else if (getCurrentLocale().equals("de")) {

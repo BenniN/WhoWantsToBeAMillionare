@@ -30,18 +30,13 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_view, parent, false);
         }
-
         TextView textView = convertView.findViewById(R.id.list_view_text_view);
         textView.setText(getItem(position));
-
         if (position == this.currentPosition) {
             convertView.setBackgroundColor(Color.argb(170,255, 170, 0));
         } else {
             convertView.setBackgroundColor(Color.argb(0, 0, 0, 0));
         }
-
         return convertView;
     }
-
-
 }
