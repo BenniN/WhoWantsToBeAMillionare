@@ -37,7 +37,8 @@
             android:layout_marginBottom="15dp"
             android:layout_weight="0.25"
             android:background="@drawable/buttonanswer"
-            android:text="@string/start_game" />
+            android:text="@string/start_game"
+            android:textColor="@android:color/background_light" />
 
         <Button
             android:id="@+id/buttonOptions"
@@ -51,7 +52,8 @@
             android:layout_marginBottom="40dp"
             android:layout_weight="0.25"
             android:background="@drawable/buttonanswer"
-            android:text="@string/settings_button" />
+            android:text="@string/settings_button"
+            android:textColor="@android:color/background_light" />
 
         <Button
             android:id="@+id/buttonExitGame"
@@ -65,7 +67,8 @@
             android:layout_marginBottom="80dp"
             android:layout_weight="0.25"
             android:background="@drawable/buttonanswer"
-            android:text="@string/exit" />
+            android:text="@string/exit"
+            android:textColor="@android:color/background_light" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
