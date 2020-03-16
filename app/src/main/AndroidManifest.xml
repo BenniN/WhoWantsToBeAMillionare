@@ -16,10 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WhoWantsToBeAMillionare"/>
+        <activity android:name=".WhoWantsToBeAMillionaire"/>
         <activity android:name=".Options"/>
         <activity android:name=".Endscreen"/>
-        <activity android:name=".MillionareEndsceen"/>
+        <activity android:name=".MillionaireEndScreen"/>
         <activity android:name=".EndscreenTimeout"/>
 
     </application>

@@ -24,7 +24,7 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     }
 
     /**
-     * sets the background colour of a specif line.
+     * sets the background colour of a specific line.
      */
     @NonNull
     @Override

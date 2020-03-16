@@ -9,8 +9,8 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    Options options = new Options();
-    MediaPlayer mainTheme;
+
+    private MediaPlayer mainTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent activityStart = new Intent(MainActivity.this, WhoWantsToBeAMillionare.class);
+                Intent activityStart = new Intent(MainActivity.this, WhoWantsToBeAMillionaire.class);
                 startActivityForResult(activityStart, 1);
                 mainTheme.pause();
                 finish();
@@ -46,12 +46,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mainTheme = MediaPlayer.create(this, R.raw.maintheme);
-        if (options.getBooleanValue()) {
+        if (Options.isMusicOn()) {
             mainTheme.start();
         } else {
             mainTheme.pause();
         }
-
         mainTheme.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
@@ -60,43 +59,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
     public void onPause() {
         super.onPause();
         mainTheme.pause();
     }
-
+    @Override
     public void onResume() {
         super.onResume();
         mainTheme.start();
     }
-
-
-
-/*
-    private void resetTitle() {
-        try {
-            int label = getPackageManager().getActivityInfo(getComponentName(), GET_META_DATA).labelRes;
-            if (label != 0) {
-                setTitle(label);
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-
-        }
-    }
-
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(LocaleHelper.setLocale(base));
-    }
-
-
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        LocaleManager.setLocale(this);
-    }
-
- */
 }

@@ -13,38 +13,39 @@ import android.widget.ListView;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-public class WhoWantsToBeAMillionare extends Activity {
-    //to know if the switch has the value true or false
-    Options options = new Options();
+public class WhoWantsToBeAMillionaire extends Activity {
+
     //setup timers
-    CountDownTimer countdownMainTimer, countdownWrongQuestion;
+    private CountDownTimer countdownMainTimer, countdownWrongQuestion;
     // in there the time is displayed
-    Button time;
+    private Button time;
     // init to display the graph
-    ImageView imageViewAudienceAnswer;
+    private ImageView imageViewAudienceAnswer;
 
     //to know what was the correct answer after clicking
-    String correctanswer;
+    private String correctanswer;
     // int which will take the numbers out of the arraylist to display non dupicate random questions
-    int intForNextQuestion = 0;
+    private int intForNextQuestion = 0;
     //needed to set a counter to win after 14 questions
-    int correctAnswerCounter = 0;
+    private int correctAnswerCounter = 0;
     //if a answer has been pressed i don't want the user to click on certain jokers, so to make sure that the correct accesability is set on a new question
-    boolean joker1, joker2, joker3, joker4 = false;
+    private boolean joker1, joker2, joker3, joker4 = false;
     //all interaction buttons
-    Button buttonQuestion, buttonOptionA, buttonOptionB, buttonOptionC, buttonOptionD, buttonNext, buttonFiftyFifty, buttonPhoneSomeone, buttonAskAudience, buttonSkipQuestion;
+    private Button buttonQuestion, buttonOptionA, buttonOptionB, buttonOptionC, buttonOptionD, buttonNext, buttonFiftyFifty, buttonPhoneSomeone, buttonAskAudience, buttonSkipQuestion;
     //go to the next element of the arraylist
-    int elementOfArraylist = 0;
+    private int elementOfArraylist = 0;
     //initialize Mediaplayer for clock ticking and applause audio
-    MediaPlayer clockTickingAudio, applauseAudio;
+    private MediaPlayer clockTickingAudio, applauseAudio;
     //initialize the list view
     private MySimpleArrayAdapter adapter;
 
@@ -59,7 +60,7 @@ public class WhoWantsToBeAMillionare extends Activity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, MainActivity.class);
+                Intent activityStart = new Intent(WhoWantsToBeAMillionaire.this, MainActivity.class);
                 startActivityForResult(activityStart, 1);
                 clockTickingAudio.pause();
                 applauseAudio.pause();
@@ -70,14 +71,14 @@ public class WhoWantsToBeAMillionare extends Activity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, Options.class);
+                Intent activityStart = new Intent(WhoWantsToBeAMillionaire.this, Options.class);
                 startActivityForResult(activityStart, 1);
                 finish();
             }
         });
 
         clockTickingAudio = MediaPlayer.create(this, R.raw.ticktock);
-        if (options.getBooleanValue()) {
+        if (Options.isMusicOn()) {
             clockTickingAudio.start();
         } else {
             clockTickingAudio.pause();
@@ -141,7 +142,7 @@ public class WhoWantsToBeAMillionare extends Activity {
             public void onFinish() {
                 clockTickingAudio.pause();
                 setContentView(R.layout.endscreen);
-                Intent intent = new Intent(WhoWantsToBeAMillionare.this, EndscreenTimeout.class);
+                Intent intent = new Intent(WhoWantsToBeAMillionaire.this, EndscreenTimeout.class);
                 startActivity(intent);
                 countdownMainTimer.cancel();
                 finish();
@@ -151,7 +152,7 @@ public class WhoWantsToBeAMillionare extends Activity {
 
     public void clap() {
         clockTickingAudio.pause();
-        if (options.getBooleanValue()) {
+        if (Options.isMusicOn()) {
             applauseAudio.start();
         }
     }
@@ -203,7 +204,6 @@ public class WhoWantsToBeAMillionare extends Activity {
      * will open the phone activity to call someone
      * @param view  updates the picture to a used joker
      */
-
     public void onPhoneSomeoneClicked(View view) {
         Button b = findViewById(R.id.buttonPhone);
         b.setBackgroundResource(R.drawable.jokerphonex);
@@ -307,62 +307,41 @@ public class WhoWantsToBeAMillionare extends Activity {
     public void read() {
         intForNextQuestion = generateNumber();
         elementOfArraylist++;
-        SAXBuilder builder = new SAXBuilder();
         AssetManager assets = getAssets();
 
         try {
             if (getCurrentLocale().equals("en")) {
                 InputStream in = assets.open("questionfile_en.xml");
-                Document document = builder.build(in);
-                Element rootNode = document.getRootElement();
-                List<Element> list = rootNode.getChildren("Question");
-                Element node = list.get(intForNextQuestion);
-                System.out.println("Question : " + node.getChildText("question"));
-                buttonQuestion.setText(node.getChildText("question"));
-                System.out.println("option A : " + node.getChildText("optiona"));
-                buttonOptionA.setText(node.getChildText("optiona"));
-                System.out.println("option B : " + node.getChildText("optionb"));
-                buttonOptionB.setText(node.getChildText("optionb"));
-                System.out.println("option C : " + node.getChildText("optionc"));
-                buttonOptionC.setText(node.getChildText("optionc"));
-                System.out.println("option D : " + node.getChildText("optiond"));
-                buttonOptionD.setText(node.getChildText("optiond"));
-                correctanswer = (node.getChildText("correctanswer"));
-                System.out.println(correctanswer);
-
+                readXML(in);
             } else if (getCurrentLocale().equals("de")) {
-
                 InputStream in = assets.open("questionfile_de.xml");
-                Document document = builder.build(in);
-
-                Element rootNode = document.getRootElement();
-
-                List<Element> list = rootNode.getChildren("Question");
-
-                Element node = list.get(intForNextQuestion);
-
-                System.out.println("Question : " + node.getChildText("question"));
-                buttonQuestion.setText(node.getChildText("question"));
-
-                System.out.println("option A : " + node.getChildText("optiona"));
-                buttonOptionA.setText(node.getChildText("optiona"));
-
-                System.out.println("option B : " + node.getChildText("optionb"));
-                buttonOptionB.setText(node.getChildText("optionb"));
-
-                System.out.println("option C : " + node.getChildText("optionc"));
-                buttonOptionC.setText(node.getChildText("optionc"));
-
-                System.out.println("option D : " + node.getChildText("optiond"));
-                buttonOptionD.setText(node.getChildText("optiond"));
-
-                correctanswer = (node.getChildText("correctanswer"));
-
-                System.out.println(correctanswer);
+               readXML(in);
             }
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+    }
 
-        } catch (Exception io) {
-            System.out.println(io.getMessage());
+    private void readXML(InputStream in) {
+        SAXBuilder builder = new SAXBuilder();
+        try {
+            Document document = builder.build(in);
+            Element rootNode = document.getRootElement();
+
+            List<Element> list = rootNode.getChildren("Question");
+            Element node = list.get(intForNextQuestion);
+
+            buttonQuestion.setText(node.getChildText("question"));
+            buttonOptionA.setText(node.getChildText("optiona"));
+            buttonOptionB.setText(node.getChildText("optionb"));
+            buttonOptionC.setText(node.getChildText("optionc"));
+            buttonOptionD.setText(node.getChildText("optiond"));
+
+            correctanswer = (node.getChildText("correctanswer"));
+        } catch (JDOMException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -387,33 +366,34 @@ public class WhoWantsToBeAMillionare extends Activity {
         }
     }
 
-    public void onOptionAClicked(View view) {
+
+    /**
+     * logic for every answer button
+     * @param button to make sure which button is clicked
+     */
+    private void onAnswerButtonClicked(Button button) {
         countdownMainTimer.cancel();
         clockTickingAudio.pause();
-        String value2 = buttonOptionA.getText().toString();
+        String value2 = button.getText().toString();
         disableButtons();
 
         if (value2.equalsIgnoreCase(correctanswer) && correctAnswerCounter != 14) {
-            Button b2 = findViewById(R.id.boptiona);
-            b2.setBackgroundResource(R.drawable.buttonanswerright);
+            button.setBackgroundResource(R.drawable.buttonanswerright);
             buttonNext.setVisibility(View.VISIBLE);
             correctAnswerCounter++;
             clap();
         } else if (value2.equalsIgnoreCase(correctanswer) && correctAnswerCounter == 14) {
-            Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, MillionareEndsceen.class);
+            Intent activityStart = new Intent(WhoWantsToBeAMillionaire.this, MillionaireEndScreen.class);
             startActivityForResult(activityStart, 1);
             finish();
         } else {
-            Button b2 = findViewById(R.id.boptiona);
-            b2.setBackgroundResource(R.drawable.buttonawnserwrong);
-
-
+            button.setBackgroundResource(R.drawable.buttonawnserwrong);
             countdownWrongQuestion = new CountDownTimer(3000, 1000) {
                 public void onTick(long millisUntilFinished) {
                 }
 
                 public void onFinish() {
-                    Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, Endscreen.class);
+                    Intent activityStart = new Intent(WhoWantsToBeAMillionaire.this, Endscreen.class);
                     startActivityForResult(activityStart, 1);
                     finish();
                 }
@@ -422,122 +402,22 @@ public class WhoWantsToBeAMillionare extends Activity {
             whatWasTheCorrectAwnser();
         }
 
+    }
 
+    public void onOptionAClicked(View view) {
+        onAnswerButtonClicked(buttonOptionA);
     }
 
     public void onOptionBClicked(View view) {
-        countdownMainTimer.cancel();
-        clockTickingAudio.pause();
-        String value3 = buttonOptionB.getText().toString();
-        disableButtons();
-
-
-        if (value3.equalsIgnoreCase(correctanswer) && correctAnswerCounter != 14) {
-            Button b3 = findViewById(R.id.boptionb);
-            b3.setBackgroundResource(R.drawable.buttonanswerright);
-            buttonNext.setVisibility(View.VISIBLE);
-            correctAnswerCounter++;
-            clap();
-        } else if (value3.equalsIgnoreCase(correctanswer) && correctAnswerCounter == 14) {
-            Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, MillionareEndsceen.class);
-            startActivityForResult(activityStart, 1);
-            finish();
-        } else {
-            Button b2 = findViewById(R.id.boptionb);
-            b2.setBackgroundResource(R.drawable.buttonawnserwrong);
-
-
-            countdownWrongQuestion = new CountDownTimer(3000, 1000) {
-                public void onTick(long millisUntilFinished) {
-
-                }
-
-                public void onFinish() {
-                    Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, Endscreen.class);
-                    startActivityForResult(activityStart, 1);
-                    finish();
-                }
-            };
-            countdownWrongQuestion.start();
-            whatWasTheCorrectAwnser();
-        }
+        onAnswerButtonClicked(buttonOptionB);
     }
 
     public void onOptionCClicked(View view) {
-        countdownMainTimer.cancel();
-        clockTickingAudio.pause();
-
-        String value4 = buttonOptionC.getText().toString();
-        disableButtons();
-
-        if (value4.equalsIgnoreCase(correctanswer) && correctAnswerCounter != 14) {
-            Button b4 = findViewById(R.id.boptionc);
-            b4.setBackgroundResource(R.drawable.buttonanswerright);
-            buttonNext.setVisibility(View.VISIBLE);
-            correctAnswerCounter++;
-            clap();
-        } else if (value4.equalsIgnoreCase(correctanswer) && correctAnswerCounter == 14) {
-            Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, MillionareEndsceen.class);
-            startActivityForResult(activityStart, 1);
-            finish();
-        } else {
-            Button b2 = findViewById(R.id.boptionc);
-            b2.setBackgroundResource(R.drawable.buttonawnserwrong);
-
-
-            countdownWrongQuestion = new CountDownTimer(3000, 1000) {
-                public void onTick(long millisUntilFinished) {
-
-                }
-
-                public void onFinish() {
-                    Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, Endscreen.class);
-                    startActivityForResult(activityStart, 1);
-                    finish();
-                }
-            };
-            countdownWrongQuestion.start();
-            whatWasTheCorrectAwnser();
-        }
+        onAnswerButtonClicked(buttonOptionC);
     }
 
     public void onOptionDClicked(View view) {
-        countdownMainTimer.cancel();
-        clockTickingAudio.pause();
-        String value5 = buttonOptionD.getText().toString();
-        disableButtons();
-
-        if (value5.equalsIgnoreCase(correctanswer) && correctAnswerCounter != 14) {
-            Button b2 = findViewById(R.id.boptiond);
-            b2.setBackgroundResource(R.drawable.buttonanswerright);
-            buttonNext.setVisibility(View.VISIBLE);
-            correctAnswerCounter++;
-            clap();
-        } else if (value5.equalsIgnoreCase(correctanswer) && correctAnswerCounter == 14) {
-
-            Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, MillionareEndsceen.class);
-            startActivityForResult(activityStart, 1);
-            finish();
-        } else {
-            Button b = findViewById(R.id.boptiond);
-            b.setBackgroundResource(R.drawable.buttonawnserwrong);
-
-
-            countdownWrongQuestion = new CountDownTimer(3000, 1000) {
-                public void onTick(long millisUntilFinished) {
-
-                }
-
-                public void onFinish() {
-                    Intent activityStart = new Intent(WhoWantsToBeAMillionare.this, Endscreen.class);
-                    startActivityForResult(activityStart, 1);
-                    finish();
-                }
-            };
-            countdownWrongQuestion.start();
-            whatWasTheCorrectAwnser();
-        }
-
+        onAnswerButtonClicked(buttonOptionD);
     }
 
     /**
@@ -547,7 +427,7 @@ public class WhoWantsToBeAMillionare extends Activity {
     public void nextPlayClicked(View view) {
         read();
         countdownMainTimer.start();
-        if (options.getBooleanValue()) {
+        if (Options.isMusicOn()) {
             clockTickingAudio.start();
         }
 

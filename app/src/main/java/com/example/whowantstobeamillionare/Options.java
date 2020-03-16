@@ -9,9 +9,10 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 public class Options extends Activity {
+
     private static boolean musicOnOrOff = false;
 
-
+    @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
 
@@ -26,16 +27,6 @@ public class Options extends Activity {
                 finish();
             }
         });
-/*
-        Button button = findViewById(R.id.buttonSelectLanguage);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showChangeLanguageDialog();
-            }
-        });
-
-*/
 
         Switch switch1 = findViewById(R.id.switchMusic);
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -47,52 +38,8 @@ public class Options extends Activity {
         switch1.setChecked(musicOnOrOff);
     }
 
-    public static boolean getBooleanValue() {
+    public static boolean isMusicOn() {
         return musicOnOrOff;
     }
-/*
-    private void showChangeLanguageDialog(){
-        final String[] listItems ={"English","Deutsch"};
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Options.this);
-        mBuilder.setTitle("Choose Language...");
-        mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (which == 0) {
-                    setLocale("en");
-                    recreate();
-                } else if (which == 1) {
-
-                    setLocale("de");
-                    recreate();
-                }
-                dialog.dismiss();
-            }
-        });
-        AlertDialog mDialog =mBuilder.create();
-        mDialog.show();
-
-    }
-    public void setLocale(String lang){
-        Locale locale =new Locale (lang);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale =locale;
-        getBaseContext().getResources().updateConfiguration(config,getBaseContext().getResources().getDisplayMetrics());
-        //save data to shared preffernces
-        SharedPreferences.Editor editor= getSharedPreferences("Settings",MODE_PRIVATE).edit();
-        editor.putString("My_Lang",lang);
-        editor.apply();
-    }
-
-
-
-    public void loadLocale(){
-        SharedPreferences prefs = getSharedPreferences("Settings",Activity.MODE_PRIVATE);
-        String language = prefs.getString("My_Lang","");
-        setLocale(language);
-    }
-
- */
 }
 
